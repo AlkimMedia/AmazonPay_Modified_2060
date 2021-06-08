@@ -25,9 +25,6 @@ var alkimAmazonPay = {
     }
 }
 
-
-
-
 var commentsInput = document.getElementById('checkout-confirmation-comments-input');
 if(commentsInput){
     commentsInput.addEventListener('keyup', function(){

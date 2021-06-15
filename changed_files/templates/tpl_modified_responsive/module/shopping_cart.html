@@ -32,7 +32,7 @@
       <div class="cssButtonPos8">{$BUTTON_CHECKOUT}</div>
       {* BOF Amazon Pay Checkout *}
       {if 'MODULE_PAYMENT_AMAZON_PAY_STATUS'|defined && $smarty.const.MODULE_PAYMENT_AMAZON_PAY_STATUS === 'True'}
-        <div class="amazon-pay-button cssButtonPos8"></div>
+        <div class="amazon-pay-button cssButtonPos8" style="clear:none; border-top:none;"></div>
       {/if}
       {* EOF Amazon Pay Checkout *}
       {if $BUTTON_PAYPAL != '' && !$PAYPALPLAN}<div class="cssButtonPos8">{$BUTTON_PAYPAL}</div>{/if}

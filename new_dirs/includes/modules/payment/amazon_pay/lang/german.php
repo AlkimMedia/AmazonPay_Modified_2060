@@ -1,5 +1,7 @@
 <?php
-
+/**
+ * @package AlkimMediaAmazonPayCV2Global
+ */
 $texts = [
     //default payment module texts
     'MODULE_PAYMENT_AMAZON_PAY_TEXT_DESCRIPTION' => 'Amazon Pay',

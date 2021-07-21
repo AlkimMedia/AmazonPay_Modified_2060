@@ -109,7 +109,7 @@ class CheckoutHelper
         $loginPayload = json_encode([
             'signInReturnUrl' => xtc_href_link('amazon_pay_login.php'),
             'storeId' => $this->configHelper->getClientId(),
-            'signInScopes' => ["name", "email", "postalCode"],
+            'signInScopes' => ["name", "email", "postalCode", "shippingAddress"],
         ]);
 
         $productType = 'PayAndShip';
@@ -234,11 +234,6 @@ class CheckoutHelper
                     }catch(e){
                         //console.warn(e);
                     }
-                    
-                    
-              
-                    
-                    
                 </script>
 EOT;
         if ($this->configHelper->isDebugMode()) {

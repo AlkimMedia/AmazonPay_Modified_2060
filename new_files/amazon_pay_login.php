@@ -11,14 +11,12 @@ $checkoutHelper  = new \AlkimAmazonPay\CheckoutHelper();
 $configHelper    = new \AlkimAmazonPay\ConfigHelper();
 $amazonPayHelper = new \AlkimAmazonPay\AmazonPayHelper;
 $token           = $_GET['buyerToken'];
-
 $buyer = $amazonPayHelper->getClient()->getBuyer($token);
 
 $q  = "SELECT * FROM " . TABLE_CUSTOMERS . " WHERE customers_email_address = '" . xtc_db_input($buyer['email']) . "' and account_type = '0'";
 $rs = xtc_db_query($q);
-
 if ($r = xtc_db_fetch_array($rs)) {
-    $customerId = $r['customers_id'];
+    $accountHelper->doLogin($r['customers_id']);
 } else {
     require_once DIR_FS_INC . 'xtc_create_password.inc.php';
     $password = xtc_create_password(32);
@@ -51,28 +49,13 @@ if ($r = xtc_db_fetch_array($rs)) {
         'customers_info_id' => $customerId,
     ]);
     
-}
+    $address = new AmazonPayExtendedSdk\Struct\Address($buyer['shippingAddress']);
+    $addressBookSqlArray = $accountHelper->convertAddressToArray($address);
+    
+    $addressId = (int)$accountHelper->createAddress($address, $customerId);
+    xtc_db_perform(TABLE_CUSTOMERS, ['customers_default_address_id' => $addressId], 'update', 'customers_id = ' . (int)$customerId);
 
-$_SESSION['customer_id'] = $customerId;
-
-$q  = "SELECT * FROM " . TABLE_CUSTOMERS . " WHERE customers_id = " . (int)$customerId;
-$rs = xtc_db_query($q);
-if ($r = xtc_db_fetch_array($rs)) {
-    $_SESSION['customer_gender'] = $r['customers_gender'];
-    $_SESSION['customer_first_name'] = $r['customers_firstname'];
-    $_SESSION['customer_last_name'] = $r['customers_lastname'];
-    $_SESSION['customer_email_address'] = $r['customers_email_address'];
-    $_SESSION['customer_time'] = $r['customers_password_time'];
-    $_SESSION['customer_id'] = $r['customers_id'];
-    $_SESSION['customer_vat_id'] = $r['customers_vat_id'];
-    if ($_SESSION['customer_time'] == 0) {
-        $_SESSION['customer_time'] = time();
-        xtc_db_query("UPDATE ".TABLE_CUSTOMERS." SET customers_password_time = '".(int)$_SESSION['customer_time']."' WHERE customers_id = '".(int)$_SESSION['customer_id']."'");
-    }
+    $accountHelper->doLogin($customerId);
 }
 
 xtc_redirect(xtc_href_link('account.php'));
-
-
-
-

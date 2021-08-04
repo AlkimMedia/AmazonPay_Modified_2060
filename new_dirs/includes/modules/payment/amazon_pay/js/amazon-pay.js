@@ -12,7 +12,7 @@ var alkimAmazonPay = {
         var fields = form.querySelectorAll('input, select, textarea');
         for(var i = 0; i < fields.length; i++){
             var field = fields[i];
-            if(field.name && field.value) {
+            if(field.name && field.value && field.type != 'submit') {
                 params.push(encodeURIComponent(field.name) + '=' + encodeURIComponent(field.value));
             }
         }
@@ -22,7 +22,7 @@ var alkimAmazonPay = {
         xhr.onload = callback.bind(xhr);
         console.log(url, params);
         xhr.send(params);
-    }
+    }                                                     
 };
 
 var commentsInput = document.getElementById('checkout-confirmation-comments-input');

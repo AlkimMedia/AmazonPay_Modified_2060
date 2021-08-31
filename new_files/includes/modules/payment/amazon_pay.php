@@ -43,7 +43,7 @@ class amazon_pay
 
         $this->code        = __CLASS__;
         $this->title       = MODULE_PAYMENT_AMAZON_PAY_TEXT_TITLE;
-        $this->description = MODULE_PAYMENT_AMAZON_PAY_TEXT_DESCRIPTION;
+        $this->description = 'Version '.\AlkimAmazonPay\Config::PLUGIN_VERSION;
         $this->sort_order  = MODULE_PAYMENT_AMAZON_PAY_SORT_ORDER;
         $this->enabled     = (MODULE_PAYMENT_AMAZON_PAY_STATUS == 'True');
         $this->info        = MODULE_PAYMENT_AMAZON_PAY_TEXT_INFO;

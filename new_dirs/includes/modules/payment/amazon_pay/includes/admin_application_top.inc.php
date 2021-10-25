@@ -94,5 +94,9 @@ if (!empty($_GET['amazon_pay_action'])) {
     xtc_redirect(xtc_href_link('orders.php', xtc_get_all_get_params(['amazon_pay_action']), 'SSL'));
 }
 
-$orderHelper = new \AlkimAmazonPay\OrderHelper();
-$orderHelper->doShippingCapture();
+try{
+    $orderHelper = new \AlkimAmazonPay\OrderHelper();
+    $orderHelper->doShippingCapture();
+}catch(Exception $e){
+    \AlkimAmazonPay\GeneralHelper::log('error', 'shipping capture error', [$e->getMessage(), $e->getTraceAsString()]);
+}

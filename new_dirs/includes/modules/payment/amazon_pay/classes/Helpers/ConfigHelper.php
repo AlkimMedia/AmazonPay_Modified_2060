@@ -125,7 +125,7 @@ class ConfigHelper
             ],
             'APC_IPN_URL'                          => [
                 'type'  => static::FIELD_TYPE_READ_ONLY,
-                'value' => HTTPS_CATALOG_SERVER . DIR_WS_CATALOG . 'callback/amazon_pay/ipn.php'
+                'value' => (defined('HTTPS_CATALOG_SERVER') ? HTTPS_CATALOG_SERVER : HTTPS_SERVER) . DIR_WS_CATALOG . 'callback/amazon_pay/ipn.php'
             ],
             'APC_CRON_STATUS'                          => [
                 'type'  => static::FIELD_TYPE_BOOL

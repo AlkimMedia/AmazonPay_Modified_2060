@@ -138,7 +138,6 @@ class CheckoutHelper
         $useCreditUrl = xtc_href_link('callback/amazon_pay/use_credit.php', '', 'SSL');
         $return = <<<EOT
                 <script src="https://static-eu.payments-amazon.com/checkout.js"></script>
-                <script src="$jsPath"></script>
                 <script type="text/javascript" charset="utf-8">
                     const useCreditUrl = '$useCreditUrl';
                     try{

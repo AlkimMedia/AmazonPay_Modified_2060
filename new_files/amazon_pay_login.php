@@ -39,7 +39,6 @@ if ($r = xtc_db_fetch_array($rs)) {
         'customers_telephone' => '',
         'customers_password' => $password,
         'customers_newsletter' => 0,
-        'customers_newsletter_mode' => 0,
         'member_flag' => 0,
         'delete_user' => 0,
         'account_type' => 0,

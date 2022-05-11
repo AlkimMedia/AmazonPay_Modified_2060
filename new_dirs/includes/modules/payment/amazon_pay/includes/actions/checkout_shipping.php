@@ -35,7 +35,6 @@ if (!empty($_GET['amazonCheckoutSessionId'])) {
             'customers_password' => $password,
             'customers_password_time' => $passwordTime,
             'customers_newsletter' => 0,
-            'customers_newsletter_mode' => 0,
             'member_flag' => 0,
             'delete_user' => 1,
             'account_type' => 1,

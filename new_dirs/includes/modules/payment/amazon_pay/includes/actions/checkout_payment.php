@@ -5,7 +5,7 @@
 $_SESSION['amazon_pay_delivery_zip']     = null;
 $_SESSION['amazon_pay_delivery_country'] = null;
 
-if ($_SESSION['sendto'] === false) {
+if (isset($_SESSION['sendto']) && $_SESSION['sendto'] === false) {
     require_once (DIR_WS_CLASSES . 'order.php');
     $order = new order();
     if (!($order->content_type == 'virtual' || ($order->content_type == 'virtual_weight') || ($_SESSION['cart']->count_contents_virtual() == 0))) {
